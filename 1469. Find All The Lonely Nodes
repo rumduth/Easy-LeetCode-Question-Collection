@@ -1,0 +1,37 @@
+from typing import (
+    List,
+)
+from lintcode import (
+    TreeNode,
+)
+
+"""
+Definition of TreeNode:
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left, self.right = None, None
+"""
+
+class Solution:
+    """
+    @param root: Root node of a tree.
+    @return: List of lonely nodes.
+             we will sort your return value in output
+    """
+    def get_lonely_nodes(self, root: TreeNode) -> List[int]:
+        # --- write your code here ---
+        res = []
+        
+        def dfs(r):
+            if r is None:
+                return
+            if r.left and not r.right:
+                res.append(r.left.val)
+            if r.right and not r.left:
+                res.append(r.right.val)
+            dfs(r.left)
+            dfs(r.right)
+        
+        dfs(root)
+        return res
