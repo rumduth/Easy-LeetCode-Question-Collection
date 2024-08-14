@@ -1,0 +1,62 @@
+from collections import deque
+class MovingAverage(object):
+    """
+    @param: size: An integer
+    """
+    def __init__(self, size):
+        # do intialization if necessary
+        self.queue = deque([])
+        self.size = size
+
+    """
+    @param: val: An integer
+    @return:  
+    """
+    def next(self, val):
+        # write your code here
+        self.queue.append(val)
+        if len(self.queue) <= self.size:
+            return sum(self.queue) / len(self.queue)
+        self.queue.popleft()
+        return sum(self.queue) / len(self.queue)
+
+
+# Your MovingAverage object will be instantiated and called as such:
+# obj = MovingAverage(size)
+# param = obj.next(val)
+
+
+class MovingAverage(object):
+    """
+    @param: size: An integer
+    """
+    def __init__(self, size):
+        # do intialization if necessary
+        self.queue = [0] * size
+        self.window_sum = 0
+        self.index = 0
+        self.fullSize = False
+
+    """
+    @param: val: An integer
+    @return:  
+    """
+    def next(self, val):
+        self.window_sum -= self.queue[self.index] 
+        self.queue[self.index] = val
+        self.window_sum += val
+        self.index = (self.index + 1) % len(self.queue)
+        if not self.fullSize:
+            if self.index == 0:
+                self.fullSize = True
+        if self.fullSize:
+            return self.window_sum / len(self.queue)
+        
+        return self.window_sum / self.index
+
+        # write your code here
+
+
+# Your MovingAverage object will be instantiated and called as such:
+# obj = MovingAverage(size)
+# param = obj.next(val)
