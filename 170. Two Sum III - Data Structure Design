@@ -1,0 +1,25 @@
+class TwoSum:
+    """
+    @param number: An integer
+    @return: nothing
+    """
+    def __init__(self):
+        self.arr = {}
+        
+    def add(self, number):
+        # write your code here
+        self.arr[number] = self.arr.get(number, 0) + 1
+
+    """
+    @param value: An integer
+    @return: Find if there exists any pair of numbers which sum is equal to the value.
+    """
+    def find(self, value):
+        # write your code here
+        for num, cnt in self.arr.items():
+            complement = value - num
+            if complement == num and cnt > 1:
+                return True
+            elif complement != num and complement in self.arr:
+                return True 
+        return False
