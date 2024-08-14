@@ -1,0 +1,29 @@
+from typing import (
+    List,
+)
+
+class Solution:
+    """
+    @param nums: a sorted integer array
+    @param lower: An integer
+    @param upper: An integer
+    @return: a list of its missing ranges
+    """
+    def find_missing_ranges(self, nums: List[int], lower: int, upper: int) -> List[str]:
+        # write your code here
+        res = []
+        start = lower
+        for end in nums:
+            if start + 1 == end:
+                res.append(str(start))
+            elif start < end:
+                res.append(f"{start}->{end-1}")
+            start = end + 1
+
+        if start == upper:
+            res.append(f"{start}")
+        elif start < upper:
+            res.append(f"{start}->{upper}")
+        return res
+            
+
