@@ -1,0 +1,29 @@
+class Solution {
+public:
+    /**
+     * @param word: a non-empty string
+     * @param abbr: an abbreviation
+     * @return: true if string matches with the given abbr or false
+     */
+
+    bool validWordAbbreviation(string &word, string &abbr) {
+        // write your code here
+        int i = 0;
+        int j = 0;
+        while(i < word.length() and j < abbr.length()){
+            if(word[i] == abbr[j]){
+                i++;
+                j++;
+            }else if(isdigit(abbr[j]) && abbr[j] != '0'){
+                int l = 0;
+                while(j < abbr.length() && isdigit(abbr[j])){
+                    l = l * 10 + (abbr[j] - '0');
+                    j++;
+                }
+                i = i + l;
+            }else
+                return false;
+        }
+        return i == word.length() && j == abbr.length();
+    }
+};
